@@ -7,30 +7,27 @@
  * Return: Nothing.
  */
 
-void rotl(stack_t **stack, unsigned int nline)
+void rotl(stack_t **stack, _attribute_((unused)) unsigned int nline)
 {
-	stack_t *temp;
-	int hold_this, hold_this_again;
-	(void)nline;
+	stack_t *tmp = *stack, aux;
 
-	if (stack == NULL || *stack == NULL)
+	if (stack == NULL || (*stack)->next == NULL)
 	{
-		nop(stack, nline);
+		return;
 	}
 
-	hold_this = (*stack)->n;
-	temp = *stack;
+	aux = (*stack)->next;
+	aux->prev = NULL;
 
-	while (temp)
+	while (tmp->next != NULL)
 	{
-		if (temp->next == NULL)
-			break;
-		temp = temp->next;
+		tmp = tmp-> next;
 	}
 
-	hold_this_again = temp->n;
-	(*stack)->n = hold_this_again;
-	temp->n = hold_this;
+	tmp->next = *stack;
+	(*stack)->next = NULL;
+	(*stack)->prev = tmp;
+	(*stack) = aux;
 }
 
 /**
