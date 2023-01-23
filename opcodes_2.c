@@ -116,25 +116,18 @@ void pchar(stack_t **stack, unsigned int nline)
  */
 void pstr(stack_t **stack, unsigned int nline)
 {
-	int idx = 0;
-	char res[] = "";
-	char c;
-	stack_t *temp;
+	stack_t *h;
+	(void)counter;
 
-	temp = *stack;
-	(void)nline;
-	/* starts at the top */
-	while (temp)
+	h = *head;
+	while (h)
 	{
-		if (temp->n == 0)
+		if (h->n > 127 || h->n <= 0)
+		{
 			break;
-		if (_isalpha(temp->n) == 0)
-			break;
-		c = temp->n;
-		printf("%c", c);
-		res[idx] += c;
-		temp = temp->next;
-		idx++;
+		}
+		printf("%c", h->n);
+		h = h->next;
 	}
 	printf("\n");
 }
