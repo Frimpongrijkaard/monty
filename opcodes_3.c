@@ -38,25 +38,28 @@ void rotl(stack_t **stack, _attribute_((unused)) unsigned int nline)
  */
 void rotlop(stack_t **stack, unsigned int nline)
 {
-	stack_t *last, *tmp;
-
+	stack_t *temp;
+	int hold_this, hold_this_again;
 	(void)nline;
-	if (!stack || !(*stack) || !((*stack)->next))
-		return;
 
-	tmp = *stack;
-	last = tmp;
-
-	while (last->next)
+	if (stack == NULL || *stack == NULL)
 	{
-		last = last->next;
+		nop(stack, nline);
 	}
 
-	last->next = tmp;
-	tmp->prev = last;
-	tmp->next->prev = NULL;
-	*stack = tmp->next;
-	tmp->next = NULL;
+	hold_this = (*stack)->n;
+	temp = *stack;
+
+	while (temp)
+	{
+		if (temp->next == NULL)
+			break;
+		temp = temp->next;
+	}
+
+	hold_this_again = temp->n;
+	(*stack)->n = hold_this_again;
+	temp->n = hold_this;
 }
 
 /**
