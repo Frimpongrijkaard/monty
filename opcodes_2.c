@@ -114,7 +114,7 @@ void pchar(stack_t **stack, unsigned int nline)
  * @nline: the line number
  * Return: Nothing.
  */
-[Ovoid pstr(stack_t **stack, unsigned int nline)
+void pstr(stack_t **stack, unsigned int nline)
 {
 	int idx = 0;
 	char res[] = "";
